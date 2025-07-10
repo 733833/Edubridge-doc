@@ -1,0 +1,15 @@
+Write a code that counts how many palindromic substrings are present in a given string
+def count_palindromic_substrings(s):
+    def expand_around_center(left, right):
+        count = 0
+        while left >= 0 and right < len(s) and s[left] == s[right]:
+            count += 1
+            left -= 1
+            right += 1
+        return count
+
+    total = 0
+    for i in range(len(s)):
+        total += expand_around_center(i, i)     # Odd length
+        total += expand_around_center(i, i + 1) # Even length
+    return total
